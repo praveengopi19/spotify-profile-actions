@@ -98,7 +98,7 @@ app.put('/getAuthToken', function(req,res){
 	if(tempTokenId){
 		return res.status(200).json(tokensForAuth[tempTokenId])
 	}
-	return res.json({error:"Code not found"})
+	return res.status(403).json({error:"Code not found"})
 })
 
 
