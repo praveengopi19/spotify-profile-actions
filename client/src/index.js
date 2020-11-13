@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+import '../src/App.css'
 const App = function () {
     return (<h1>Whoo! Got it</h1>)
 }
