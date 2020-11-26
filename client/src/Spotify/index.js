@@ -42,7 +42,6 @@ export const getAllTracks = (period) => { axios.get(`https://api.spotify.com/v1/
 
 export const getRecent = async () => {
     const { data } = await axios.get('https://api.spotify.com/v1/me/player/recently-played', { headers })
-    console.log(data)
     return data
 }
 

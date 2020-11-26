@@ -72,7 +72,7 @@ class App extends React.Component {
                             <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
                             <PrivateRoute path="/playlist" location auth={this.state.auth} componet={Allplaylist} exact />
                             <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
-                            <PrivateRoute path="/tracks/:id" location auth={this.state.auth} componet={Track} exact />
+                            <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
                             <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
                             <Route component={Loader} />
                         </Switch>

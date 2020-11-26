@@ -11,12 +11,13 @@ class Recent extends Component {
 
     async componentDidMount() {
         let tempRecent = await getRecent()
-        console.log(tempRecent)
         this.setState({ recent: tempRecent })
     }
 
     render() {
-        return (<AllTracks items={this.state.recent.items} />)
+        return (<div className="authcontentSection">
+            {this.state.recent ? <AllTracks items={this.state.recent.items} /> : <h1>Loading</h1>}
+        </div>)
     }
 }
 
