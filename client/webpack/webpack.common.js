@@ -11,15 +11,5 @@ module.exports = {
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html'
-    })],
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            }
-
-        ]
-    }
+    })]
 }
