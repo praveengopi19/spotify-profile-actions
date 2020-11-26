@@ -14,7 +14,7 @@ class AllTracks extends Component {
                 <h2 className="heading">Recently Played Tracks</h2>
                 {this.props.items.map(({ track }, i) => {
                     return (
-                        <Link className="linkClass" to={`/track/${track.id}`}>
+                        <Link key={"link" + i} className="linkClass" to={`/track/${track.id}`}>
                             <div className="tracksIndividual" key={i}>
                                 <img src={track.album.images[2].url} alt={track.name} />
                                 <div className="tracksNameAlbum">

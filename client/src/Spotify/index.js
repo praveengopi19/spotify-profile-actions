@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { default as axiosApi } from '../utils/axios'
 
 export const setAssessToken = (token) => localStorage.setItem('Spotify_accessToken', token)
 
@@ -8,10 +9,11 @@ export const setRefreshToken = (token) => localStorage.setItem('Spotify_refreshT
 
 export const getRefreshToken = () => localStorage.getItem('Spotify_refreshToken')
 
-const headers = {
-    Authorization: `Bearer ${getAssessToken()}`,
-    'Content-Type': 'application/json',
-};
+export const removeTokens = () => {
+    localStorage.removeItem('Spotify_accessToken')
+    localStorage.removeItem('Spotify_refreshToken')
+}
+
 
 export const getAuthToken = async (token) => {
     try {
@@ -28,32 +30,47 @@ export const loginUser = async () => { //await axios.get('http://localhost:5000/
     window.location = ("http://localhost:5000/login");
 }
 
-export const getRefreshedAccessToken = () => { axios.get('http://localhost:5000/getRefreshToken') }
+export const getRefreshedAccessToken = async () => {
+    try {
+        const { data } = await axios.get(`http://localhost:5000/getRefreshedAccessToken?refreshToken=${getRefreshToken()}`)
+        const { access_token } = data
+        setAssessToken(access_token)
+        return access_token
+    }
+    catch (e) {
+        return "server error"
+    }
+}
+export const getUser = () => { axiosApi.get('https://api.spotify.com/v1/me') }
 
-export const getUser = () => { axios.get('https://api.spotify.com/v1/me') }
+export const getFollowing = () => axiosApi.get('https://api.spotify.com/v1/me/following?type=artist')
 
-export const getFollowing = () => axios.get('https://api.spotify.com/v1/me/following?type=artist')
+export const getAllPlaylist = () => { axiosApi.get('https://api.spotify.com/v1/me/playlists') }
 
-export const getAllPlaylist = () => { axios.get('https://api.spotify.com/v1/me/playlists') }
+export const getAllArtist = (period) => { axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`) }
 
-export const getAllArtist = (period) => { axios.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`) }
-
-export const getAllTracks = (period) => { axios.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${period}`) }
+export const getAllTracks = (period) => { axiosApi.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${period}`) }
 
 export const getRecent = async () => {
-    const { data } = await axios.get('https://api.spotify.com/v1/me/player/recently-played', { headers })
-    return data
+    try {
+        const { data } = await axiosApi.get('https://api.spotify.com/v1/me/player/recently-played')
+        return data
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
 }
 
-export const getArtist = (id) => { axios.get(`https://api.spotify.com/v1/artists/${id}`) }
+export const getArtist = (id) => { axiosApi.get(`https://api.spotify.com/v1/artists/${id}`) }
 
-export const getTrack = (id) => { axios.get(`https://api.spotify.com/v1/tracks/${id}`) }
+export const getTrack = (id) => { axiosApi.get(`https://api.spotify.com/v1/tracks/${id}`) }
 
-export const getPlaylist = (id) => { axios.get(`https://api.spotify.com/v1/playlists/${id}`) }
+export const getPlaylist = (id) => { axiosApi.get(`https://api.spotify.com/v1/playlists/${id}`) }
 
-export const getAudioAnalysis = (id) => { axios.get(`https://api.spotify.com/v1/audio-analysis/${id}`) }
+export const getAudioAnalysis = (id) => { axiosApi.get(`https://api.spotify.com/v1/audio-analysis/${id}`) }
 
-export const getAudioTrackFeatures = (id) => { axios.get(`https://api.spotify.com/v1/audio-features/${id}`) }
+export const getAudioTrackFeatures = (id) => { axiosApi.get(`https://api.spotify.com/v1/audio-features/${id}`) }
 
 
 
