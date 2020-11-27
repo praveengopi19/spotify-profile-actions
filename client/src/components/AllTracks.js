@@ -10,7 +10,7 @@ class AllTracks extends Component {
 
     render() {
         return (
-            <div className="inner">
+            <>
                 <h2 className="heading">Recently Played Tracks</h2>
                 {this.props.items.map(({ track }, i) => {
                     return (
@@ -38,7 +38,7 @@ class AllTracks extends Component {
                         </Link>)
                 })
                 }
-            </div>
+            </>
         )
     }
 }

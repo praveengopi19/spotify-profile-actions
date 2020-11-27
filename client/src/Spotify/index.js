@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { default as axiosApi } from '../utils/axios'
 
+
 export const setAssessToken = (token) => localStorage.setItem('Spotify_accessToken', token)
 
 export const getAssessToken = () => localStorage.getItem('Spotify_accessToken')
@@ -8,6 +9,10 @@ export const getAssessToken = () => localStorage.getItem('Spotify_accessToken')
 export const setRefreshToken = (token) => localStorage.setItem('Spotify_refreshToken', token)
 
 export const getRefreshToken = () => localStorage.getItem('Spotify_refreshToken')
+
+
+// setAssessToken("a")
+// setRefreshToken("b")
 
 export const removeTokens = () => {
     localStorage.removeItem('Spotify_accessToken')

@@ -13,11 +13,11 @@ const Allplaylist = lazy(() => import('./page/Allplaylist'))
 const Artist = lazy(() => import('./page/Artist'))
 const Track = lazy(() => import('./page/Track'))
 const Playlist = lazy(() => import('./page/Playlist'))
+const Navbar = lazy(() => import('./components/Navbar'))
 
 
 const PrivateRoute = ({ componet: Component, location, auth, ...rest }) => {
     let destination = location.pathname
-    console.log(auth)
     return (
         <Route {...rest} render={(props) => auth === true ? (<Component {...rest} {...props} />) : (<Redirect to={{ pathname: '/login', state: { destination } }} />)} />
     )
@@ -64,19 +64,27 @@ class App extends React.Component {
             <>
                 {!this.state.isLoading ?
                     < Suspense fallback={<Loader />}>
-                        <Switch >
-                            <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
-                            <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
-                            <PrivateRoute path="/artist" location auth={this.state.auth} componet={Topartists} exact />
-                            <PrivateRoute path="/tracks" location auth={this.state.auth} componet={Toptracks} exact />
-                            <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
-                            <PrivateRoute path="/playlist" location auth={this.state.auth} componet={Allplaylist} exact />
-                            <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
-                            <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
-                            <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
-                            <Route component={Loader} />
-                        </Switch>
-                    </ Suspense> : <Loader />}
+                        {this.state.auth && <Navbar />}
+                        <div className="authcontentSection">
+                            <div className="inner">
+                                <Switch >
+                                    <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
+                                    <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
+                                    <PrivateRoute path="/artist" location auth={this.state.auth} componet={Topartists} exact />
+                                    <PrivateRoute path="/tracks" location auth={this.state.auth} componet={Toptracks} exact />
+                                    <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
+                                    <PrivateRoute path="/playlist" location auth={this.state.auth} componet={Allplaylist} exact />
+                                    <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
+                                    <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
+                                    <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
+                                    <Route component={Loader} />
+                                </Switch>
+                            </div>
+                        </div>
+                    </ Suspense>
+
+                    : <Loader />
+                }
             </>)
     }
 }

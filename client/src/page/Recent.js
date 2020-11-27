@@ -15,9 +15,9 @@ class Recent extends Component {
     }
 
     render() {
-        return (<div className="authcontentSection">
-            {this.state.recent ? <AllTracks items={this.state.recent.items} /> : <h1>Loading</h1>}
-        </div>)
+        return (
+            this.state.recent ? <AllTracks items={this.state.recent.items} /> : <h1>Loading</h1>
+        )
     }
 }
 
