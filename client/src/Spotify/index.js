@@ -50,9 +50,28 @@ export const getUser = () => { axiosApi.get('https://api.spotify.com/v1/me') }
 
 export const getFollowing = () => axiosApi.get('https://api.spotify.com/v1/me/following?type=artist')
 
-export const getAllPlaylist = () => { axiosApi.get('https://api.spotify.com/v1/me/playlists') }
 
-export const getAllArtist = (period) => { axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`) }
+export const getAllPlaylist = async () => {
+    try {
+        const { data } = await axiosApi.get('https://api.spotify.com/v1/me/playlists')
+        return data
+    }
+    catch (e) {
+        return "server error"
+    }
+}
+
+
+export const getAllArtist = async (period) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`)
+        return data
+    }
+    catch (e) {
+        return "server error"
+    }
+}
+
 
 export const getAllTracks = async (period) => {
     try {

@@ -8,7 +8,7 @@ const User = lazy(() => import('./page/User'))
 const Topartists = lazy(() => import('./page/Topartists'))
 const Toptracks = lazy(() => import('./page/Toptracks'))
 const Recent = lazy(() => import('./page/Recent'))
-const Allplaylist = lazy(() => import('./page/Allplaylist'))
+const YourPlaylist = lazy(() => import('./page/YourPlaylist'))
 
 const Artist = lazy(() => import('./page/Artist'))
 const Track = lazy(() => import('./page/Track'))
@@ -73,7 +73,7 @@ class App extends React.Component {
                                     <PrivateRoute path="/artist" location auth={this.state.auth} componet={Topartists} exact />
                                     <PrivateRoute path="/tracks" location auth={this.state.auth} componet={Toptracks} exact />
                                     <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
-                                    <PrivateRoute path="/playlist" location auth={this.state.auth} componet={Allplaylist} exact />
+                                    <PrivateRoute path="/playlist" location auth={this.state.auth} componet={YourPlaylist} exact />
                                     <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
                                     <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
                                     <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />

@@ -8,11 +8,6 @@ class AllTracks extends Component {
         return min.replace('.', ':')
     }
 
-    renderingTracks(items) {
-
-    }
-
-
     render() {
         return (
             <>
