@@ -16,7 +16,10 @@ class Recent extends Component {
 
     render() {
         return (
-            this.state.recent ? <AllTracks items={this.state.recent.items} /> : <h1>Loading</h1>
+            <>
+                <h2 className="heading">Recently Played Tracks</h2>
+                { this.state.recent ? <AllTracks items={this.state.recent.items} from={"recent"} /> : <h1>Loading</h1>}
+            </>
         )
     }
 }

@@ -18,15 +18,19 @@ axiosApiInstance.interceptors.response.use(response => {
     return response
 }, async error => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && error.response.message === "The access token expired" && !originalRequest._retry) {
+
+    if (error.response.status === 401 && error.response.data.error.message === "The access token expired" && !originalRequest._retry) {
+
         originalRequest._retry = true;
         const newAcessToken = await getRefreshedAccessToken()
         originalRequest.headers['Authorization'] = 'Bearer ' + newAcessToken;
+
         return axiosApiInstance(originalRequest)
     }
     if (error.response.status === 401) {
         removeTokens()
     }
+
     Promise.reject(error)
 })
 

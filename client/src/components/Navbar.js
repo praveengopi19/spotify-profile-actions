@@ -14,7 +14,6 @@ class Navbar extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.pathname != this.props.location.pathname) {
-            console.log(prevState != this.props.location.pathname)
             this.setState({ pathname: this.props.location.pathname })
         }
     }

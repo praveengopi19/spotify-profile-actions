@@ -54,7 +54,15 @@ export const getAllPlaylist = () => { axiosApi.get('https://api.spotify.com/v1/m
 
 export const getAllArtist = (period) => { axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`) }
 
-export const getAllTracks = (period) => { axiosApi.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${period}`) }
+export const getAllTracks = async (period) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${period}`)
+        return data
+    }
+    catch (e) {
+        return "server error"
+    }
+}
 
 export const getRecent = async () => {
     try {

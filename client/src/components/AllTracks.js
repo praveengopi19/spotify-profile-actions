@@ -8,11 +8,18 @@ class AllTracks extends Component {
         return min.replace('.', ':')
     }
 
+    renderingTracks(items) {
+
+    }
+
+
     render() {
         return (
             <>
-                <h2 className="heading">Recently Played Tracks</h2>
-                {this.props.items.map(({ track }, i) => {
+                {this.props.items.map((track, i) => {
+                    if (this.props.from === "recent") {
+                        track = track.track
+                    }
                     return (
                         <Link key={"link" + i} className="linkClass" to={`/track/${track.id}`}>
                             <div className="tracksIndividual" key={i}>
