@@ -98,9 +98,73 @@ export const getArtist = (id) => { axiosApi.get(`https://api.spotify.com/v1/arti
 
 export const getTrack = (id) => { axiosApi.get(`https://api.spotify.com/v1/tracks/${id}`) }
 
-export const getPlaylist = (id) => { axiosApi.get(`https://api.spotify.com/v1/playlists/${id}`) }
+export const getPlaylist = async (id) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/playlists/${id}`)
+        return data
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+}
 
-export const getAudioAnalysis = (id) => { axiosApi.get(`https://api.spotify.com/v1/audio-analysis/${id}`) }
+
+export const getAudioAnalysis = async (id) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/audio-analysis/${id}`)
+        return data
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+}
+
+const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(',');
+
+
+export const getAudioFeaturesForTracks = async tracks => {
+    try {
+
+        const ids = getTrackIds(tracks);
+        //console.log(ids)
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/audio-features?ids=${ids}`)
+
+        const audioFeatures = {
+            acousticness: 0,
+            danceability: 0,
+            energy: 0,
+            instrumentalness: 0,
+            liveness: 0,
+            speechiness: 0,
+            valence: 0
+        }
+
+
+
+        data.audio_features.map(({ acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence }) => {
+            audioFeatures["acousticness"] += acousticness
+            audioFeatures["danceability"] += danceability
+            audioFeatures["energy"] += energy
+            audioFeatures["instrumentalness"] += instrumentalness
+            audioFeatures["liveness"] += liveness
+            audioFeatures["speechiness"] += speechiness
+            audioFeatures["valence"] += valence
+        })
+
+        for (const [key, value] of Object.entries(audioFeatures)) {
+            audioFeatures[`${key}`] = (value / tracks.length * 100).toFixed(0)
+        }
+
+
+        return audioFeatures
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+};
 
 export const getAudioTrackFeatures = (id) => { axiosApi.get(`https://api.spotify.com/v1/audio-features/${id}`) }
 

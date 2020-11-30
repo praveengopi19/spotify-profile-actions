@@ -12,7 +12,7 @@ class AllTracks extends Component {
         return (
             <>
                 {this.props.items.map((track, i) => {
-                    if (this.props.from === "recent") {
+                    if (this.props.from === "recent" || this.props.from === "playlist") {
                         track = track.track
                     }
                     return (
