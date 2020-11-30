@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import AllTracks from '../components/AllTracks'
+import Loader from '../components/Loader'
+
 import { getAllTracks } from '../Spotify/index'
 
 class Toptracks extends Component {
@@ -40,7 +42,7 @@ class Toptracks extends Component {
                     </div>
                 </div>
 
-                {this.state.tracks ? <AllTracks items={this.state.tracks.items} from={"tracks"} /> : <h1>Loading</h1>}
+                {this.state.tracks ? <AllTracks items={this.state.tracks.items} from={"tracks"} /> : <Loader />}
             </>)
     }
 }

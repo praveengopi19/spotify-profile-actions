@@ -1,9 +1,6 @@
 import React from 'react'
 
-function uppercaseFirstLetter(key) {
-    let tempString = key.substring(0, 1)
-    return (tempString.toUpperCase() + key.substring(1))
-}
+import { uppercaseFirstLetter } from '../utils/UppercaseFirstLetter';
 
 function AudioFeatures({ audioFeatures }) {
     const arr = []

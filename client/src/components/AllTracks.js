@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import { formatTime } from '../utils/FormatTime'
+
 class AllTracks extends Component {
 
-    formatTime(millisecond) {
-        let min = (millisecond / 60000).toFixed(2) + ''
-        return min.replace('.', ':')
-    }
 
     render() {
         return (
@@ -35,7 +33,7 @@ class AllTracks extends Component {
                                 {track.album.name}
                                     </div>
                                 </div>
-                                <div className="tracksDuration">{this.formatTime(track.duration_ms)}</div>
+                                <div className="tracksDuration">{formatTime(track.duration_ms)}</div>
                             </div>
                         </Link>)
                 })

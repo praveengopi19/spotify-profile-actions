@@ -22,6 +22,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+/*Loader*/
+
+
+
 /* Inner content */
 
 .authcontentSection {
@@ -277,7 +281,7 @@ nav svg {
 
 .playlistIndividual_details {
     padding   : 0 5px 10px 5px;
-    flex      : 1 0 30%;
+    flex      : 0 0 30%;
     text-align: center;
 }
 
@@ -294,12 +298,12 @@ nav svg {
 
 .playlistIndividual_details h2 {
     margin-top   : 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .playlistIndividual_details .secondaryText,
 .playlistIndividual_details .primaryText {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 /*Playlist analysis*/
@@ -329,6 +333,83 @@ nav svg {
     height          : 100%;
     border-radius   : .55rem;
     background-color: #44476a;
+}
+
+/*Track Individual*/
+.track_individual_right {
+    display        : flex;
+    flex-flow      : row wrap;
+    justify-content: flex-start;
+    align-items    : center;
+    align-content  : center;
+    border-top     : 1px solid #d1d9e6;
+    border-left    : 1px solid #d1d9e6;
+}
+
+.track_individual_right div {
+    border-bottom: 1px solid #d1d9e6;
+    border-right : 1px solid #d1d9e6;
+    flex         : 0 0 auto;
+    width        : 25%;
+    padding      : 15px 10px;
+    text-align   : center;
+}
+
+.track_individual_right h4 {
+    font-size  : 25px;
+    font-weight: 700;
+    padding    : 5px;
+    margin     : 0;
+}
+
+.track_individual_right p {
+    margin   : 0;
+    padding  : 0;
+    font-size: 12px;
+}
+
+/*All Artist*/
+.artistsAllImage {
+    height: 13rem;
+}
+
+/*Individual Artist*/
+
+.artist_individual {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    height         : 90vh;
+}
+
+.artistCard {
+    border-radius: .55rem;
+    padding      : 1.5rem;
+    width        : auto;
+    margin       : 20px auto;
+    align-self   : center;
+    text-align   : center;
+    box-shadow   : 6px 6px 12px #b8b9be, -6px -6px 12px #fff !important;
+}
+
+.artistCard img {
+    object-fit   : cover;
+    border-radius: 1rem !important;
+    height       : 300px;
+    width        : 300px;
+}
+
+.artistCard h2 {
+    margin: .75rem auto;
+}
+
+.artistCard .secondaryText {
+    margin-top   : 10px;
+    margin-bottom: 10px;
+}
+
+.artistCard .btn-primary {
+    margin: 10px 0;
 }
 
 /* button */

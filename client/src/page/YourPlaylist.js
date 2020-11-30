@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AllPlaylist from '../components/AllPlaylist'
+import Loader from '../components/Loader'
 
 import { getAllPlaylist } from '../Spotify/index'
 
@@ -18,7 +19,7 @@ class YourPlaylist extends Component {
         return (
             <>
                 <h2 className="heading">Your Playlists</h2>
-                { this.state.playlist ? <AllPlaylist playlists={this.state.playlist.items} /> : <h1>Loading</h1>}
+                { this.state.playlist ? this.state.playlist.items ? <AllPlaylist playlists={this.state.playlist.items} /> : <div>No Tracks Found</div> : <Loader />}
             </>)
     }
 }

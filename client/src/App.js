@@ -15,6 +15,8 @@ const Track = lazy(() => import('./page/Track'))
 const Playlist = lazy(() => import('./page/Playlist'))
 const Navbar = lazy(() => import('./components/Navbar'))
 
+import Loader from './components/Loader'
+
 
 const PrivateRoute = ({ componet: Component, location, auth, ...rest }) => {
     let destination = location.pathname
@@ -23,9 +25,6 @@ const PrivateRoute = ({ componet: Component, location, auth, ...rest }) => {
     )
 }
 
-const Loader = () => {
-    return (<h1>Loading</h1>)
-}
 
 class App extends React.Component {
     state = {

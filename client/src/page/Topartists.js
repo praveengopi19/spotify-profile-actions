@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import AllArtist from '../components/AllArtist'
+import Loader from '../components/Loader'
+
 import { getAllArtist } from '../Spotify'
+
 
 class Topartists extends Component {
     state = {
@@ -11,6 +14,7 @@ class Topartists extends Component {
     async componentDidMount() {
         const tempArtists = await getAllArtist("long_term")
         this.setState({ artist: tempArtists })
+        //console.log(tempArtists)
     }
 
     async changePeriod(period) {
@@ -40,7 +44,7 @@ class Topartists extends Component {
                     </div>
                 </div>
 
-                {this.state.artist ? <AllArtist artists={this.state.artist} /> : <h1>Loading</h1>}
+                {this.state.artist ? <AllArtist artists={this.state.artist.items} /> : <Loader />}
             </>)
     }
 }

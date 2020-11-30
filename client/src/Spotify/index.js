@@ -94,9 +94,27 @@ export const getRecent = async () => {
     }
 }
 
-export const getArtist = (id) => { axiosApi.get(`https://api.spotify.com/v1/artists/${id}`) }
+export const getArtist = async (id) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/artists/${id}`)
+        return data
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+}
 
-export const getTrack = (id) => { axiosApi.get(`https://api.spotify.com/v1/tracks/${id}`) }
+export const getTrack = async (id) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/tracks/${id}`)
+        return data
+    }
+    catch (e) {
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+}
 
 export const getPlaylist = async (id) => {
     try {
@@ -112,7 +130,9 @@ export const getPlaylist = async (id) => {
 
 export const getAudioAnalysis = async (id) => {
     try {
+
         const { data } = await axiosApi.get(`https://api.spotify.com/v1/audio-analysis/${id}`)
+        //console.log(data)
         return data
     }
     catch (e) {
@@ -121,8 +141,39 @@ export const getAudioAnalysis = async (id) => {
     }
 }
 
+
+
 const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(',');
 
+export const audioFeatures_forProgress = (audio_features, tracks_length = 1) => {
+    const audioFeatures = {
+        acousticness: 0,
+        danceability: 0,
+        energy: 0,
+        instrumentalness: 0,
+        liveness: 0,
+        speechiness: 0,
+        valence: 0
+    }
+
+    audio_features.map(({ acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence }) => {
+        audioFeatures["acousticness"] += acousticness
+        audioFeatures["danceability"] += danceability
+        audioFeatures["energy"] += energy
+        audioFeatures["instrumentalness"] += instrumentalness
+        audioFeatures["liveness"] += liveness
+        audioFeatures["speechiness"] += speechiness
+        audioFeatures["valence"] += valence
+    })
+
+
+    for (const [key, value] of Object.entries(audioFeatures)) {
+        audioFeatures[`${key}`] = (value / tracks_length * 100).toFixed(0)
+    }
+
+    return audioFeatures
+
+}
 
 export const getAudioFeaturesForTracks = async tracks => {
     try {
@@ -131,42 +182,30 @@ export const getAudioFeaturesForTracks = async tracks => {
         //console.log(ids)
         const { data } = await axiosApi.get(`https://api.spotify.com/v1/audio-features?ids=${ids}`)
 
-        const audioFeatures = {
-            acousticness: 0,
-            danceability: 0,
-            energy: 0,
-            instrumentalness: 0,
-            liveness: 0,
-            speechiness: 0,
-            valence: 0
-        }
-
-
-
-        data.audio_features.map(({ acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence }) => {
-            audioFeatures["acousticness"] += acousticness
-            audioFeatures["danceability"] += danceability
-            audioFeatures["energy"] += energy
-            audioFeatures["instrumentalness"] += instrumentalness
-            audioFeatures["liveness"] += liveness
-            audioFeatures["speechiness"] += speechiness
-            audioFeatures["valence"] += valence
-        })
-
-        for (const [key, value] of Object.entries(audioFeatures)) {
-            audioFeatures[`${key}`] = (value / tracks.length * 100).toFixed(0)
-        }
-
+        const audioFeatures = audioFeatures_forProgress(data.audio_features, tracks.length)
 
         return audioFeatures
     }
     catch (e) {
+        console.error(e)
         window.location = ("http://localhost:3000/error");
         return "server error"
     }
 };
 
-export const getAudioTrackFeatures = (id) => { axiosApi.get(`https://api.spotify.com/v1/audio-features/${id}`) }
+
+export const getAudioTrackFeatures = async (id) => {
+    try {
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/audio-features/${id}`)
+        // console.log(data)
+        return data
+    }
+    catch (e) {
+        console.error(e)
+        window.location = ("http://localhost:3000/error");
+        return "server error"
+    }
+}
 
 
 

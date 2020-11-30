@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import AllTracks from '../components/AllTracks'
 import AudioFeatures from '../components/AudioFeatures'
+import Loader from '../components/Loader'
 
 import { getPlaylist, getAudioFeaturesForTracks } from '../Spotify/index'
 
@@ -33,7 +34,7 @@ class Playlist extends Component {
                             {this.state.playlist.description && <div className="secondaryText">{this.state.playlist.description}</div>}
                             <div className="primaryText">{this.state.playlist.tracks.total} Tracks</div>
                             <a className="linkClass" target="_blank" href={this.state.playlist.external_urls.spotify}>
-                                <button className="btn-primary">Open In Spotify</button>
+                                <button className="btn-primary">OPEN ON SPOTIFY</button>
                             </a>
                             <div style={{ marginTop: "20px" }}>
                                 {this.state.audioFeatures && <AudioFeatures audioFeatures={this.state.audioFeatures} />}
@@ -43,7 +44,7 @@ class Playlist extends Component {
                             <AllTracks items={this.state.playlist.tracks.items} from="playlist" />
                         </div>
                     </div>
-                ) : <h1>Loading</h1>}
+                ) : <Loader />}
             </>
         )
     }
