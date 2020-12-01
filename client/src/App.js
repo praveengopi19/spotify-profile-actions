@@ -39,7 +39,7 @@ class App extends React.Component {
             //console.log("local 1", getAssessToken(), getRefreshToken())
         }
         else {
-            console.log("local 2")
+            //console.log("local 2")
             let parms = this.props.location.pathname === "/" ? (new URLSearchParams(this.props.location.search)).get("token") : null
 
             if (parms == "invalid" && parms !== null) {
@@ -49,7 +49,7 @@ class App extends React.Component {
             let tempToken = parms ? await getAuthToken(parms) : ""
 
             if (tempToken && !this.state.auth) {
-                console.log("local 3")
+                //console.log("local 3")
                 this.setState({ auth: true })
             }
         }

@@ -54,6 +54,13 @@ body::-webkit-scrollbar {
     box-shadow   : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
 }
 
+.card svg {
+    fill         : #44476a;
+    border-radius: 100%;
+    width        : 150px;
+    height       : 150px;
+}
+
 .card img {
     border-radius: 100%;
     width        : 150px;
@@ -71,8 +78,8 @@ body::-webkit-scrollbar {
 }
 
 .card h2 {
-    margin-top   : 80px;
-    margin-bottom: 25px;
+    margin-top   : 85px;
+    margin-bottom: 20px;
 }
 
 .userContainer .left,
@@ -511,6 +518,12 @@ nav svg {
 
 .artistCard .btn-primary {
     margin: 10px 0;
+}
+
+.emptyContent {
+    font-size  : 14px;
+    font-weight: 500;
+    padding    : 0 10px;
 }
 
 /* button */

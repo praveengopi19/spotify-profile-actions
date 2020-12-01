@@ -5,7 +5,6 @@ import './pages.css'
 
 class Login extends Component {
     render() {
-        console.log("Login")
         return (this.props.auth ? (<Redirect to='/' />) :
             (<>
                 <div className="loginDiv">

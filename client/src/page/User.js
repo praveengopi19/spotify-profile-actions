@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import { IconProfile } from '../components/Icons';
+
+import { numberWithComa } from '../utils/NumbersWithComa'
+
 import AllTrack from '../components/AllTracks'
 import Loader from '../components/Loader'
 
@@ -34,20 +38,20 @@ class User extends Component {
                     <div className="flexDiv">
                         <div className="card">
                             <div className="imageContainer">
-                                <img src={user.images.length && user.images[0].url} />
+                                {user.images.length > 0 ? <img src={user.images[0].url} /> : <IconProfile />}
                             </div>
                             <h2>{user.display_name}</h2>
                             <div className="followFollwersDiv">
                                 <div>
-                                    <div className="primaryText">{user.followers.total}</div>
+                                    <div className="primaryText">{numberWithComa(user.followers.total)}</div>
                                     <div className="secondaryText">FOLLOWING</div>
                                 </div>
                                 <div>
-                                    <div className="primaryText">{artists.items.length}</div>
+                                    <div className="primaryText">{numberWithComa(artists.items.length)}</div>
                                     <div className="secondaryText">FOLLOWERS</div>
                                 </div>
                                 <div>
-                                    <div className="primaryText">{playlists.items.length}</div>
+                                    <div className="primaryText">{numberWithComa(playlists.items.length)}</div>
                                     <div className="secondaryText">PLAYLIST</div>
                                 </div>
                             </div>
@@ -74,7 +78,7 @@ class User extends Component {
                         <>
                             {artists.items.length > 0 ? artists.items.map((artist, i) => {
                                 return (
-                                    <Link to={`/artist/${artist.id}`} className="linkClass">
+                                    <Link key={artist.id} to={`/artist/${artist.id}`} className="linkClass">
                                         <div className="tracksIndividual">
                                             <img src={artist.images[2].url} alt={artist.name} />
                                             <div className="tracksNameAlbum">
@@ -82,7 +86,7 @@ class User extends Component {
                                             </div>
                                         </div>
                                     </Link>)
-                            }) : <div className="tracksNameAlbum"> No Artist found :(</div>}
+                            }) : <div className="emptyContent"> No Artist found :(</div>}
                         </>
                     </div>
                     <div className="right">

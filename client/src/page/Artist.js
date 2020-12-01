@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Loader from '../components/Loader'
 import { uppercaseFirstLetter } from '../utils/UppercaseFirstLetter'
+
+import { numberWithComa } from '../utils/NumbersWithComa'
+
 import { getArtist } from '../Spotify/index';
 
 class Artist extends Component {
@@ -11,7 +14,6 @@ class Artist extends Component {
     async componentDidMount() {
         const tempArtist = await getArtist(this.props.match.params.id)
         this.setState({ artist: tempArtist })
-        console.log(tempArtist)
     }
 
 
@@ -35,7 +37,7 @@ class Artist extends Component {
                                 {this.state.artist.popularity}% Popular
                             </div>
                             <div className="secondaryText">
-                                {this.state.artist.followers.total} Followers
+                                {numberWithComa(this.state.artist.followers.total)} Followers
                             </div>
                             <a className="linkClass" href={this.state.artist.external_urls.spotify}>
                                 <button className="btn-primary">View on Spotify</button>

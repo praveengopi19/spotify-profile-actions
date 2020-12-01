@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function AllPlaylist({ playlists }) {
 
-    return (
+    return (playlists.length > 0 ?
         <div className="allplaylistContainer">
             {playlists.map((playlist) => {
                 return (
@@ -14,7 +14,7 @@ function AllPlaylist({ playlists }) {
                     </Link>
                 )
             })}
-        </div>
+        </div> : <div className="emptyContent"> No playlist found :(</div>
     )
 }
 
