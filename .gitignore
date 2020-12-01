@@ -47,6 +47,8 @@ node_modules/
 jspm_packages/
 ref/
 
+dist/
+
 # Optional npm cache directory
 .npm
 

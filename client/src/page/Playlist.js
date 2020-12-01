@@ -15,7 +15,7 @@ class Playlist extends Component {
     async componentDidMount() {
         const tempPlaylist = await getPlaylist(this.props.match.params.id)
         this.setState({ playlist: tempPlaylist })
-        if (tempPlaylist) {
+        if (tempPlaylist.tracks.items.length) {
             const audioFeatures = await getAudioFeaturesForTracks(tempPlaylist.tracks.items)
             this.setState({ audioFeatures })
         }
@@ -37,7 +37,7 @@ class Playlist extends Component {
                                 <button className="btn-primary">OPEN ON SPOTIFY</button>
                             </a>
                             <div style={{ marginTop: "20px" }}>
-                                {this.state.audioFeatures && <AudioFeatures audioFeatures={this.state.audioFeatures} />}
+                                {this.state.audioFeatures && this.state.playlist.tracks.items.length && <AudioFeatures audioFeatures={this.state.audioFeatures} />}
                             </div>
                         </div>
                         <div className="playlistIndividual_tracks"  >

@@ -9,13 +9,13 @@ class AllTracks extends Component {
     render() {
         return (
             <>
-                {this.props.items.map((track, i) => {
+                {this.props.items.map((track) => {
                     if (this.props.from === "recent" || this.props.from === "playlist") {
                         track = track.track
                     }
                     return (
-                        <Link key={"link" + i} className="linkClass" to={`/track/${track.id}`}>
-                            <div className="tracksIndividual" key={i}>
+                        <Link key={track.id} className="linkClass" to={`/track/${track.id}`}>
+                            <div className="tracksIndividual" >
                                 <img src={track.album.images[2].url} alt={track.name} />
                                 <div className="tracksNameAlbum">
                                     <div className="name">{track.name}</div>

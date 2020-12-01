@@ -17,6 +17,7 @@ export const getRefreshToken = () => localStorage.getItem('Spotify_refreshToken'
 export const removeTokens = () => {
     localStorage.removeItem('Spotify_accessToken')
     localStorage.removeItem('Spotify_refreshToken')
+    window.location = "/"
 }
 
 
@@ -46,9 +47,25 @@ export const getRefreshedAccessToken = async () => {
         return "server error"
     }
 }
-export const getUser = () => { axiosApi.get('https://api.spotify.com/v1/me') }
+export const getUser = async () => {
+    try {
+        const { data } = await axiosApi.get('https://api.spotify.com/v1/me')
+        return data
+    }
+    catch (e) {
+        return "server error"
+    }
+}
 
-export const getFollowing = () => axiosApi.get('https://api.spotify.com/v1/me/following?type=artist')
+export const getFollowing = async () => {
+    try {
+        const { data } = await axiosApi.get('https://api.spotify.com/v1/me/following?type=artist')
+        return data
+    }
+    catch (e) {
+        return "server error"
+    }
+}
 
 
 export const getAllPlaylist = async () => {
@@ -62,9 +79,9 @@ export const getAllPlaylist = async () => {
 }
 
 
-export const getAllArtist = async (period) => {
+export const getAllArtist = async (period, limit = 50) => {
     try {
-        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${period}`)
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/artists?limit=${limit}&time_range=${period}`)
         return data
     }
     catch (e) {
@@ -73,9 +90,9 @@ export const getAllArtist = async (period) => {
 }
 
 
-export const getAllTracks = async (period) => {
+export const getAllTracks = async (period, limit = 50) => {
     try {
-        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${period}`)
+        const { data } = await axiosApi.get(`https://api.spotify.com/v1/me/top/tracks?limit=${limit}&time_range=${period}`)
         return data
     }
     catch (e) {

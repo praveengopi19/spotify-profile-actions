@@ -41,7 +41,8 @@ app.get('/login', function(req, res) {
 
 	res.cookie(statekey,state)
 
-	res.redirect('https://accounts.spotify.com/authorize' +
+
+	res.status(301).redirect('https://accounts.spotify.com/authorize' +
 		'?response_type=code' + '&client_id=' + client_id +
 		(scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
 		'&redirect_uri=' + encodeURIComponent(redirect_uri) + 
@@ -95,12 +96,51 @@ app.get('/callback', async function(req,res){
 
 app.put('/getAuthToken', function(req,res){
 	let tempTokenId = req.query.token || null
+	console.log("incoming request", tempTokenId)
+	const tokenAuth = tokensForAuth[tempTokenId]
+	delete tokensForAuth[tempTokenId]
 	if(tempTokenId){
-		return res.status(200).json(tokensForAuth[tempTokenId])
+		return res.status(200).json(tokenAuth)
 	}
-	return res.status(403).json({error:"Code not found"})
+	return res.status(401).json({error:"Code not found"})
 })
 
+
+app.get('/getRefreshedAccessToken', async function(req,res){
+	try{
+	let refreshToken = req.query.refreshToken || null
+
+	if(!refreshToken){
+		return res.status(403).json({error:"Code not found"})
+	}
+	
+
+	const params = new URLSearchParams();
+	params.append('grant_type', 'refresh_token');
+	params.append('refresh_token', refreshToken);
+
+
+	const {data}  = await axios({
+		method:'POST',
+		url:'https://accounts.spotify.com/api/token',
+		params,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString(
+				'base64',
+				)}`,
+		},
+		json:true
+	})
+	
+	return res.json(data)
+}
+catch(e){
+	console.log(e)
+	return res.status(500).json({message:"Internal server error"})
+}
+
+})
 
 app.listen(5000, () => {
 	console.log("server is running on port 5000")
