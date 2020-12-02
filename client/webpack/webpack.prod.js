@@ -12,7 +12,7 @@ module.exports = merge(common, {
     output: {
         filename: "js/[name].[contentHash].bundle.js",
         publicPath: "/",
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../build")
     },
     plugins: [new MiniCssExtractPlugin({
         filename: "styles/[name].[contentHash].css"

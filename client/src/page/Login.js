@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import { loginUser } from '../Spotify/index'
 import './pages.css'
 
@@ -9,10 +9,10 @@ class Login extends Component {
             (<>
                 <div className="loginDiv">
                     <h2>Spotify Profile Action</h2>
-                    <button className="btn-primary loginButton" onClick={loginUser}>LOG IN TO SPOTIFY</button>
+                    <a href="http://localhost:5000/loginserver" className="linkClass btn-primary loginButton" >LOG IN TO SPOTIFY</a>
                 </div>
             </>))
     }
 }
 
-export default Login
+export default withRouter(Login)
