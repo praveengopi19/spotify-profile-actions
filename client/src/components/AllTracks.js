@@ -10,12 +10,12 @@ class AllTracks extends Component {
         return (
             this.props.items.length > 0 ?
                 <>
-                    {this.props.items.map((track) => {
+                    {this.props.items.map((track, i) => {
                         if (this.props.from === "recent" || this.props.from === "playlist") {
                             track = track.track
                         }
                         return (
-                            <Link key={track.id} className="linkClass" to={`/track/${track.id}`}>
+                            <Link key={track.id + i} className="linkClass" to={`/track/${track.id}`}>
                                 <div className="tracksIndividual" >
                                     <img src={track.album.images[2].url} alt={track.name} />
                                     <div className="tracksNameAlbum">

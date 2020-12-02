@@ -21,7 +21,13 @@ import Loader from './components/Loader'
 const PrivateRoute = ({ componet: Component, location, auth, ...rest }) => {
     let destination = location.pathname
     return (
-        <Route {...rest} render={(props) => auth === true ? (<Component {...rest} {...props} />) : (<Redirect to={{ pathname: '/login', state: { destination } }} />)} />
+        <Route {...rest} render={(props) => auth === true ?
+            (<div className="authcontentSection">
+                <div className="inner">
+                    <Component {...rest} {...props} />
+                </div>
+            </div>
+            ) : (<Redirect to={{ pathname: '/login', state: { destination } }} />)} />
     )
 }
 
@@ -64,23 +70,21 @@ class App extends React.Component {
                 {!this.state.isLoading ?
                     < Suspense fallback={<Loader />}>
                         {this.state.auth && <Navbar />}
-                        <div className="authcontentSection">
-                            <div className="inner">
-                                <Switch >
-                                    <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
-                                    <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
-                                    <PrivateRoute path="/artist" location auth={this.state.auth} componet={Topartists} exact />
-                                    <PrivateRoute path="/tracks" location auth={this.state.auth} componet={Toptracks} exact />
-                                    <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
-                                    <PrivateRoute path="/playlist" location auth={this.state.auth} componet={YourPlaylist} exact />
-                                    <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
-                                    <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
-                                    <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
-                                    <Route component={Loader} />
-                                </Switch>
-                            </div>
-                        </div>
-                    </ Suspense>
+
+                        <Switch >
+                            <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
+                            <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
+                            <PrivateRoute path="/artist" location auth={this.state.auth} componet={Topartists} exact />
+                            <PrivateRoute path="/tracks" location auth={this.state.auth} componet={Toptracks} exact />
+                            <PrivateRoute path="/recent" location auth={this.state.auth} componet={Recent} exact />
+                            <PrivateRoute path="/playlist" location auth={this.state.auth} componet={YourPlaylist} exact />
+                            <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
+                            <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
+                            <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
+                            <Route component={Loader} />
+                        </Switch>
+
+                    </ Suspense >
 
                     : <Loader />
                 }

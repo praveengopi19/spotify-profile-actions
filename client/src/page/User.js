@@ -56,7 +56,7 @@ class User extends Component {
                                 </div>
                             </div>
 
-                            <div className="followFollwersDiv">
+                            <div className="buttons">
                                 <a className="linkClass" targrt="_blank" href={user.external_urls.spotify}>
                                     <button className="btn-primary">View on Spotify</button>
                                 </a>

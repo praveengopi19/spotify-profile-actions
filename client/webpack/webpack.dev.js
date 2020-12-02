@@ -12,6 +12,8 @@ module.exports = merge(common, {
         publicPath: '/'
     },
     devServer: {
+        // host: '0.0.0.0',
+        // disableHostCheck: true,
         historyApiFallback: true,
         contentBase: path.resolve(__dirname, '../dist'),
         open: true,

@@ -22,6 +22,92 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.authcontentSection .inner {
+    padding: 30px 15px 110px 15px;
+}
+
+/*Navbar*/
+nav {
+    top             : auto;
+    bottom          : 0;
+    display         : flex;
+    position        : fixed;
+    z-index         : 1;
+    min-height      : 100px;
+    width           : 100vw;
+    justify-content : space-between;
+    align-content   : center;
+    align-items     : center;
+    flex-flow       : row nowrap;
+    box-shadow      : 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
+    background-color: #e6e7ee;
+}
+
+nav span {
+    display: none;
+}
+
+nav .navInnerContainer {
+    padding        : 0 0.5rem;
+    width          : 100%;
+    font-size      : 11px;
+    color          : #44476a;
+    display        : flex;
+    justify-content: space-between;
+    align-content  : center;
+    align-items    : center;
+    flex-flow      : row nowrap;
+}
+
+
+nav svg {
+    fill          : #44476a;
+    width         : 20px;
+    height        : 20px;
+    margin-bottom : 5px;
+    vertical-align: middle;
+}
+
+.navLink {
+    border         : .0625rem solid transparent;
+    border-radius  : .55rem;
+    width          : 75%;
+    padding        : 15px 0;
+    margin         : 5px 0;
+    vertical-align : middle;
+    text-align     : center;
+    color          : inherit;
+    text-decoration: none;
+}
+
+.navLink div {
+    margin-top: 8px;
+}
+
+
+
+.navLinkActive {
+    padding         : 15px 0px;
+    border-radius   : .55rem;
+    transition      : all .2s ease;
+    border          : .0625rem solid #d1d9e6;
+    /* border-left  : .15rem solid #44476a;
+border-right        : .15rem solid #44476a;*/
+    box-shadow      : 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+
+}
+
+/*Heading marigins*/
+
+.heading {
+    margin: 0 0 20px 0;
+}
+
+.linkClass {
+    color          : inherit;
+    text-decoration: none;
+}
+
 /*User*/
 
 .userContainer {
@@ -36,7 +122,6 @@ body::-webkit-scrollbar {
     flex       : 1 0 98%;
     padding    : 1%;
     padding-top: 85px;
-
 }
 
 .userContainer .card {
@@ -69,7 +154,7 @@ body::-webkit-scrollbar {
 
 .card .imageContainer {
     top             : -100px;
-    left            : 26%;
+    left            : 20%;
     position        : absolute;
     padding         : 0.8rem;
     border-radius   : 100%;
@@ -84,8 +169,8 @@ body::-webkit-scrollbar {
 
 .userContainer .left,
 .userContainer .right {
-    flex   : 1 0 47%;
-    padding: 1.5%;
+    flex   : 1 0 98%;
+    padding: 1%;
 }
 
 .userContainer .left h3,
@@ -110,148 +195,80 @@ body::-webkit-scrollbar {
     font-size   : 12px;
     border      : .0625rem solid #d1d9e6 !important;
     margin-right: 0;
+
 }
 
-.card .followFollwersDiv {
+.card .followFollwersDiv,
+.card .buttons {
     display        : flex;
     justify-content: space-between;
     text-align     : center;
+    flex-flow      : row wrap;
+}
+
+.card .buttons a,
+.card .buttons button {
+    flex: 1 0 98%;
 }
 
 .card .secondaryText {
     font-size: 12px;
 }
 
-.followFollwersDiv button {
-    margin: 25px 6px 7px 6px;
+.buttons button {
+    margin: 1.5rem 6px 7px 6px;
 }
 
-.followFollwersDiv>div {
+/*All Artist*/
+.artistsAllImage {
+    height: 85vw;
+}
+
+
+.buttons>div {
     margin: 0px 6px 6px 6px;
 }
 
-/* Inner content */
 
-.authcontentSection {
-    padding-left: 100px;
-}
-
-.authcontentSection .inner {
-    padding: 60px 65px;
-}
-
-/*Navbar*/
-nav {
-    display        : flex;
-    position       : fixed;
-    z-index        : 1;
-    min-height     : 100vh;
-    width          : 100px;
-    justify-content: space-between;
-    align-content  : center;
-    align-items    : center;
-    flex-flow      : column wrap;
-    box-shadow     : 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
-}
-
-nav .navInnerContainer {
-    width          : 100%;
-    font-size      : 11px;
-    color          : #44476a;
-    display        : flex;
-    justify-content: space-between;
-    align-content  : center;
-    align-items    : center;
-    flex-flow      : column wrap;
-}
-
-
-
-nav svg {
-    fill          : #44476a;
-    width         : 20px;
-    height        : 20px;
-    margin-bottom : 5px;
-    vertical-align: middle;
-}
-
-.navLink {
-    border         : .0625rem solid transparent;
-    border-radius  : .55rem;
-    width          : 75%;
-    padding        : 15px 0;
-    margin         : 5px 0;
-    vertical-align : middle;
-    text-align     : center;
-    color          : inherit;
-    text-decoration: none;
-}
-
-.navLink div {
-    margin-top: 8px;
-}
-
-.navLink:hover {
-    border-radius: .55rem;
-    transition   : all .2s ease;
-    border       : .0625rem solid #d1d9e6;
-    box-shadow   : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
-}
-
-.navLinkActive {
-    border-radius   : .55rem;
-    transition      : all .2s ease;
-    border          : .0625rem solid #d1d9e6;
-    /* border-left  : .15rem solid #44476a;
-    border-right    : .15rem solid #44476a;*/
-    box-shadow      : 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
-
-}
-
-/*Heading marigins*/
-
-.heading {
-    margin: 0 0 30px 0;
-}
-
-.linkClass {
-    color          : inherit;
-    text-decoration: none;
-}
 
 /*All tracks*/
 
 .allTracksHeading {
     display        : flex;
-    flex-flow      : row nowrap;
+    flex-flow      : row wrap;
     justify-content: space-between;
     align-content  : center;
     align-items    : center;
     margin-bottom  : 20px;
 }
 
+.allTracksHeading h2 {
+    text-align: center;
+    flex      : 1 0 100%;
+}
+
+.allTracksHeading>div {
+    display        : inline-flex;
+    justify-content: space-evenly;
+    flex           : 1 0 100%;
+}
 
 .allTracksHeading button {
     border-radius   : .55rem;
     border          : .0625rem solid transparent !important;
     color           : #44476a;
     cursor          : pointer;
-    font-size       : 16px;
+    font-size       : 14px;
     font-weight     : 500;
     border          : 0;
-    padding         : 10px 10px;
-    margin          : 0 10px;
+    padding         : 10px 5px;
+    margin          : 0;
     background-color: transparent;
     user-select     : none;
     outline         : none;
 }
 
-.allTracksHeading button:hover {
 
-    transition: all .2s ease;
-    border    : .0625rem solid #d1d9e6;
-    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
-}
 
 .allTracksHeading .activespan span {
     padding      : 0 2px 3px;
@@ -272,17 +289,11 @@ nav svg {
     border-radius  : .55rem;
 }
 
-.tracksIndividual:hover {
-    border-radius: .55rem;
-    transition   : all .2s ease;
-    border       : .0625rem solid #d1d9e6;
-    box-shadow   : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
-}
 
 .tracksIndividual img {
     height       : 50px;
     width        : 50px;
-    margin-right : 20px;
+    margin-right : 15px;
     flex-basis   : 50px;
     flex-shrink  : 0;
     border-radius: .55rem;
@@ -313,23 +324,22 @@ nav svg {
     font-size  : 14px;
     padding-top: 5px;
     align-self : start;
-    margin-left: 20px;
+    margin-left: 10px;
     text-align : center;
     min-width  : 40px;
-
 }
 
 /*All Playlist*/
 
 .allplaylistContainer {
     /* width                : 100%;
-    display              : grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-template-rows   : auto;
-    align-items          : center;
-    justify-content      : center;
-    text-align           : center;
-    gap                  : 30px; */
+display              : grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+grid-template-rows   : auto;
+align-items          : center;
+justify-content      : center;
+text-align           : center;
+gap                  : 30px; */
     width          : 100%;
     display        : flex;
     justify-content: flex-start;
@@ -341,8 +351,8 @@ nav svg {
 }
 
 .allplaylistContainer .innerContainer {
-    flex           : 1 1 19%;
-    max-width      : 19%;
+    flex           : 1 1 100%;
+    max-width      : 100%;
     text-decoration: none;
     color          : inherit;
     border         : .0625rem solid transparent;
@@ -377,7 +387,7 @@ nav svg {
 
 .playlistIndividual {
     display        : flex;
-    flex-flow      : row nowrap;
+    flex-flow      : row wrap;
     justify-content: space-between;
     align-content  : flex-start;
     align-items    : flex-start;
@@ -385,7 +395,7 @@ nav svg {
 
 .playlistIndividual_details {
     padding   : 0 5px 10px 5px;
-    flex      : 0 0 30%;
+    flex      : 0 0 100%;
     text-align: center;
 }
 
@@ -396,8 +406,7 @@ nav svg {
 }
 
 .playlistIndividual_tracks {
-    flex       : 1 1 auto;
-    margin-left: 50px;
+    flex: 1 1 auto;
 }
 
 .playlistIndividual_details h2 {
@@ -454,7 +463,7 @@ nav svg {
     border-bottom: 1px solid #d1d9e6;
     border-right : 1px solid #d1d9e6;
     flex         : 0 0 auto;
-    width        : 25%;
+    width        : 50%;
     padding      : 15px 10px;
     text-align   : center;
 }
@@ -472,24 +481,19 @@ nav svg {
     font-size: 12px;
 }
 
-/*All Artist*/
-.artistsAllImage {
-    height: 13rem;
-}
-
 /*Individual Artist*/
 
 .artist_individual {
     display        : flex;
     flex-direction : column;
     justify-content: center;
-    height         : 95vh;
+    min-height     : 85vh;
 }
 
 .artistCard {
     border-radius: .55rem;
-    padding      : 1.5rem;
-    width        : calc(300px + 3rem);
+    padding      : 1rem;
+    width        : 90%;
     margin       : 20px auto;
     align-self   : center;
     text-align   : center;
@@ -499,8 +503,8 @@ nav svg {
 .artistCard img {
     object-fit   : cover;
     border-radius: .55rem !important;
-    height       : 300px;
-    width        : 300px;
+    height       : 70vw;
+    width        : 70vw;
 }
 
 .artistCard h2 {
@@ -550,8 +554,6 @@ nav svg {
     box-shadow      : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
 }
 
-
-
 .btn-secondary {
     color           : #FA5252;
     background-color: #e6e7ee;
@@ -572,4 +574,231 @@ nav svg {
     background-color: #e6e7ee;
     border-color    : #e6e7ee;
     box-shadow      : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+}
+
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina 
+@media only screen and (min-width : 320px) {} */
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+    .artistCard {
+        width: auto;
+    }
+
+    .artistCard img {
+        height: 373px;
+        width : 373px;
+    }
+
+    /*All Playlist*/
+    .allplaylistContainer .innerContainer {
+        flex     : 1 1 48%;
+        max-width: 50%;
+        padding  : 1%;
+    }
+
+    .artistsAllImage {
+        height: 48vw;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+    .artistCard img {
+        height: 373px;
+        width : 373px;
+    }
+
+    /*All Playlist*/
+    .allplaylistContainer .innerContainer {
+        flex     : 1 1 30%;
+        max-width: 33%;
+        padding  : 1%;
+    }
+
+    .artistsAllImage {
+        height: 30vw;
+    }
+
+    /*Track Individual*/
+
+    .track_individual_right div {
+        width: 25%;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    /* Inner content */
+
+    .authcontentSection {
+        padding-left: 100px;
+    }
+
+    .authcontentSection .inner {
+        padding: 60px 65px;
+    }
+
+    /*Heading marigins*/
+
+    .heading {
+        margin: 0 0 30px 0;
+    }
+
+    /*Navbar*/
+    nav {
+        min-height: 100vh;
+        width     : 100px;
+        flex-flow : column wrap;
+    }
+
+    nav .navInnerContainer {
+        flex-flow: column wrap;
+    }
+
+    nav span {
+        display: block;
+    }
+
+    .navLink:hover {
+        border-radius: .55rem;
+        transition   : all .2s ease;
+        border       : .0625rem solid #d1d9e6;
+        box-shadow   : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+    }
+
+
+
+    /*User*/
+    .card .imageContainer {
+        left: 26%;
+    }
+
+    .userContainer .left,
+    .userContainer .right {
+        flex   : 1 0 47%;
+        padding: 1.5%;
+    }
+
+    .card .buttons a,
+    .card .buttons button {
+        flex: initial;
+    }
+
+    /*All tracks*/
+
+    .allTracksHeading {
+        flex-flow: row nowrap;
+    }
+
+    .allTracksHeading h2,
+    .allTracksHeading>div {
+        flex: initial;
+    }
+
+    .allTracksHeading button {
+        font-weight: 500;
+        padding    : 10px 10px;
+        margin     : 0 10px;
+    }
+
+    .allTracksHeading button:hover {
+
+        transition: all .2s ease;
+        border    : .0625rem solid #d1d9e6;
+        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+    }
+
+    /*All Tracks*/
+
+    .tracksDuration {
+        margin-left: 20px;
+    }
+
+    .tracksIndividual img {
+        margin-right: 20px;
+    }
+
+    .tracksIndividual:hover {
+        border-radius: .55rem;
+        transition   : all .2s ease;
+        border       : .0625rem solid #d1d9e6;
+        box-shadow   : inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+    }
+
+
+    /*All Playlist*/
+    .allplaylistContainer .innerContainer {
+        flex     : 1 1 22%;
+        max-width: 24%;
+        padding  : 1%;
+
+    }
+
+    /*Individual playlist*/
+
+    .playlistIndividual {
+        flex-flow: row nowrap;
+    }
+
+    .playlistIndividual_details {
+        flex: 0 0 30%;
+    }
+
+    .playlistIndividual_tracks {
+        margin-left: 50px;
+    }
+
+    /*Track Individual*/
+
+    .track_individual_right div {
+        border-bottom: 1px solid #d1d9e6;
+        border-right : 1px solid #d1d9e6;
+        flex         : 0 0 auto;
+        width        : 25%;
+        padding      : 15px 10px;
+        text-align   : center;
+    }
+
+    /*All Artist*/
+    .artistsAllImage {
+        height: 17vw;
+    }
+
+
+    .artistCard {
+        padding: 1.5rem;
+        width  : calc(300px + 3rem);
+    }
+
+    .artistCard img {
+        height: 300px;
+        width : 300px;
+    }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+
+    /*All Playlist*/
+    .allplaylistContainer .innerContainer {
+        flex     : 1 1 19%;
+        max-width: 19%;
+        padding  : 1%;
+    }
+
+
+    /*All Artist*/
+    .artistsAllImage {
+        height: 13rem;
+    }
+
 }
