@@ -7,19 +7,25 @@ const dotenv = require('dotenv')
 const app = express()
 const axios = require('axios')
 const uuid = require('uuid')
+const history = require('connect-history-api-fallback')
 dotenv.config()
 
 app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(bodyParser.json()) 
 app.use(cookieParser())
 app.use(cors())
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-let client_id = process.env.CLIENT_ID
-let client_secret = process.env.CLIENT_SECRET
 
-let redirect_uri = 'http://localhost:5000/callback'
-let frontend_uri = 'http://localhost:3000'
-let statekey = 'spotify_auth_state'
+
+const client_id = process.env.CLIENT_ID
+const client_secret = process.env.CLIENT_SECRET
+
+const redirect_uri = process.env.REDIRECT_URI || 'http://localhost:5000/callback'
+const frontend_uri = process.env.FRONTEND_URI || 'http://localhost:3000'
+const PORT = process.env.PORT || 5000;
+const statekey = 'spotify_auth_state'
+
 
 let tokensForAuth ={}
 
@@ -33,7 +39,8 @@ const generateRandomString = function (length) {
 	return text;
 };
 
-app.get('/login', function(req, res) {
+
+app.get('/loginserver', function(req, res) {
 
 	let scopes = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-read-currently-playing user-library-read playlist-read-private playlist-read-collaborative';
 
@@ -58,7 +65,7 @@ app.get('/callback', async function(req,res){
 
 		if(recievedState === null || recievedState !== statecookie) {
 			console.log("invalid state")
-			return res.redirect('http://localhost:3000?token=invalid')
+			return res.redirect(`${frontend_uri}?token=invalid`)
 		}
 		else{
 			const params = new URLSearchParams();
@@ -81,8 +88,8 @@ app.get('/callback', async function(req,res){
 			data.recivedAt = Date.now()
 			let tempTokenId = uuid.v4()
 			tokensForAuth[tempTokenId]=data
-			
-			return res.redirect(`http://localhost:3000?token=${tempTokenId}`)
+
+			return res.redirect(`${frontend_uri}?token=${tempTokenId}`)
 		}
 	}
 	catch(e)
@@ -96,7 +103,7 @@ app.get('/callback', async function(req,res){
 
 app.put('/getAuthToken', function(req,res){
 	let tempTokenId = req.query.token || null
-	console.log("incoming request", tempTokenId)
+
 	const tokenAuth = tokensForAuth[tempTokenId]
 	delete tokensForAuth[tempTokenId]
 	if(tempTokenId){
@@ -108,40 +115,45 @@ app.put('/getAuthToken', function(req,res){
 
 app.get('/getRefreshedAccessToken', async function(req,res){
 	try{
-	let refreshToken = req.query.refreshToken || null
+		let refreshToken = req.query.refreshToken || null
 
-	if(!refreshToken){
-		return res.status(403).json({error:"Code not found"})
+		if(!refreshToken){
+			return res.status(403).json({error:"Code not found"})
+		}
+
+
+		const params = new URLSearchParams();
+		params.append('grant_type', 'refresh_token');
+		params.append('refresh_token', refreshToken);
+
+
+		const {data}  = await axios({
+			method:'POST',
+			url:'https://accounts.spotify.com/api/token',
+			params,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString(
+					'base64',
+					)}`,
+			},
+			json:true
+		})
+
+		return res.json(data)
 	}
-	
-
-	const params = new URLSearchParams();
-	params.append('grant_type', 'refresh_token');
-	params.append('refresh_token', refreshToken);
-
-
-	const {data}  = await axios({
-		method:'POST',
-		url:'https://accounts.spotify.com/api/token',
-		params,
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString(
-				'base64',
-				)}`,
-		},
-		json:true
-	})
-	
-	return res.json(data)
-}
-catch(e){
-	console.log(e)
-	return res.status(500).json({message:"Internal server error"})
-}
+	catch(e){
+		console.log(e)
+		return res.status(500).json({message:"Internal server error"})
+	}
 
 })
 
-app.listen(5000, () => {
+app.get('/*', function (req, res) {
+	res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+});
+
+
+app.listen(PORT, () => {
 	console.log("server is running on port 5000")
 })
