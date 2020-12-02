@@ -12,7 +12,7 @@ module.exports = merge(common, {
     output: {
         filename: "js/[name].[contentHash].bundle.js",
         publicPath: "/",
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../build")
     },
     plugins: [new MiniCssExtractPlugin({
         filename: "styles/[name].[contentHash].css"
@@ -39,7 +39,12 @@ module.exports = merge(common, {
                     comments: false,
                 },
             },
-            extractComments: false,
+            extractComments: {
+                condition: /^\**!|@preserve|@license|@cc_on/i,
+                filename: (file) => {
+                    return file.replace(/\.(\w+)($|\?)/, '.$1.LICENSE.txt$2');
+                }
+            }
         })],
         runtimeChunk: {
             name: 'runtime',

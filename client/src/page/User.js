@@ -60,7 +60,10 @@ class User extends Component {
                                 <a className="linkClass" targrt="_blank" href={user.external_urls.spotify}>
                                     <button className="btn-primary">View on Spotify</button>
                                 </a>
-                                <button onClick={() => removeTokens()} className="btn-secondary">Log Out</button>
+                                <div>
+                                    <button onClick={() => removeTokens()} className="btn-secondary">Log Out</button>
+                                </div>
+
                             </div>
 
                         </div>
