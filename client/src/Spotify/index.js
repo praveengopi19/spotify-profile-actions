@@ -1,6 +1,9 @@
 import axios from 'axios'
+
 import { default as axiosApi } from '../utils/axios'
 
+
+let backend_uri = 0 ? 'http://localhost:5000' : ''
 
 export const setAssessToken = (token) => localStorage.setItem('Spotify_accessToken', token)
 
@@ -23,7 +26,7 @@ export const removeTokens = () => {
 
 export const getAuthToken = async (token) => {
     try {
-        let { data } = await axios.put(`/getAuthToken?token=${token}`)
+        let { data } = await axios.put(`${backend_uri}/getAuthToken?token=${token}`)
         setAssessToken(data["access_token"])
         setRefreshToken(data["refresh_token"])
         return getRefreshToken()
@@ -35,7 +38,7 @@ export const getAuthToken = async (token) => {
 
 export const getRefreshedAccessToken = async () => {
     try {
-        const { data } = await axios.get(`/getRefreshedAccessToken?refreshToken=${getRefreshToken()}`)
+        const { data } = await axios.get(`${backend_uri}/getRefreshedAccessToken?refreshToken=${getRefreshToken()}`)
         const { access_token } = data
         setAssessToken(access_token)
         return access_token
@@ -103,7 +106,6 @@ export const getRecent = async () => {
         return data
     }
     catch (e) {
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }
@@ -114,7 +116,6 @@ export const getArtist = async (id) => {
         return data
     }
     catch (e) {
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }
@@ -125,7 +126,6 @@ export const getTrack = async (id) => {
         return data
     }
     catch (e) {
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }
@@ -136,7 +136,6 @@ export const getPlaylist = async (id) => {
         return data
     }
     catch (e) {
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }
@@ -150,7 +149,6 @@ export const getAudioAnalysis = async (id) => {
         return data
     }
     catch (e) {
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }
@@ -201,8 +199,6 @@ export const getAudioFeaturesForTracks = async tracks => {
         return audioFeatures
     }
     catch (e) {
-        console.error(e)
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 };
@@ -215,8 +211,6 @@ export const getAudioTrackFeatures = async (id) => {
         return data
     }
     catch (e) {
-        console.error(e)
-        window.location = ("http://localhost:3000/error");
         return "server error"
     }
 }

@@ -39,7 +39,12 @@ module.exports = merge(common, {
                     comments: false,
                 },
             },
-            extractComments: false,
+            extractComments: {
+                condition: /^\**!|@preserve|@license|@cc_on/i,
+                filename: (file) => {
+                    return file.replace(/\.(\w+)($|\?)/, '.$1.LICENSE.txt$2');
+                }
+            }
         })],
         runtimeChunk: {
             name: 'runtime',

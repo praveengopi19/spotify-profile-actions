@@ -9,11 +9,14 @@ class Navbar extends Component {
     }
 
     componentDidMount() {
+
         this.setState({ pathname: this.props.location.pathname })
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.pathname != this.props.location.pathname) {
+
+        if ((prevState.pathname != this.props.location.pathname) && prevState.pathname) {
+
             this.setState({ pathname: this.props.location.pathname })
         }
     }

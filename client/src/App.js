@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from 'react'
 import { Redirect, Route, Switch, withRouter, Link } from 'react-router-dom'
 
-import { getAuthToken, getAssessToken, getRefreshToken } from './Spotify/index'
+import { getAuthToken, getAssessToken, getRefreshToken, removeTokens } from './Spotify/index'
+
+import Navbar from './components/Navbar'
 
 const Login = lazy(() => import('./page/Login'))
 const User = lazy(() => import('./page/User'))
@@ -13,7 +15,8 @@ const YourPlaylist = lazy(() => import('./page/YourPlaylist'))
 const Artist = lazy(() => import('./page/Artist'))
 const Track = lazy(() => import('./page/Track'))
 const Playlist = lazy(() => import('./page/Playlist'))
-const Navbar = lazy(() => import('./components/Navbar'))
+const NotFound = lazy(() => import('./components/NotFound'))
+
 
 import Loader from './components/Loader'
 
@@ -49,7 +52,7 @@ class App extends React.Component {
             let parms = this.props.location.pathname === "/" ? (new URLSearchParams(this.props.location.search)).get("token") : null
 
             if (parms == "invalid" && parms !== null) {
-                return this.props.history.push('/error')
+                return removeTokens()
             }
 
             let tempToken = parms ? await getAuthToken(parms) : ""
@@ -64,13 +67,13 @@ class App extends React.Component {
 
 
     render() {
+        //throw new Error("")
         const { location } = this.props
         return (
             <>
                 {!this.state.isLoading ?
                     < Suspense fallback={<Loader />}>
                         {this.state.auth && <Navbar />}
-
                         <Switch >
                             <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
                             <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
@@ -81,9 +84,8 @@ class App extends React.Component {
                             <PrivateRoute path="/artist/:id" location auth={this.state.auth} componet={Artist} exact />
                             <PrivateRoute path="/track/:id" location auth={this.state.auth} componet={Track} exact />
                             <PrivateRoute path="/playlist/:id" location auth={this.state.auth} componet={Playlist} exact />
-                            <Route component={Loader} />
+                            <Route component={NotFound} />
                         </Switch>
-
                     </ Suspense >
 
                     : <Loader />
