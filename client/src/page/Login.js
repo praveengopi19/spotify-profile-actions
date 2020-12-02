@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import { loginUser } from '../Spotify/index'
 import './pages.css'
 
 class Login extends Component {
@@ -9,7 +8,7 @@ class Login extends Component {
             (<>
                 <div className="loginDiv">
                     <h2>Spotify Profile Action</h2>
-                    <a href="http://localhost:5000/loginserver" className="linkClass btn-primary loginButton" >LOG IN TO SPOTIFY</a>
+                    <a href="https://spotify-profile-actions.herokuapp.com/loginserver" className="linkClass btn-primary loginButton" >LOG IN TO SPOTIFY</a>
                 </div>
             </>))
     }

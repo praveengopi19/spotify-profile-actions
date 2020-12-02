@@ -32,18 +32,10 @@ export const getAuthToken = async (token) => {
     }
 }
 
-export const loginUser = async (history) => { //await axios.get('http://localhost:5000/login')
-    if (0) {
-        history.push('/loginserver')
-    }
-    else {
-        window.location = ("http://localhost:5000/loginserver");
-    }
-}
 
 export const getRefreshedAccessToken = async () => {
     try {
-        const { data } = await axios.get(`http://localhost:5000/getRefreshedAccessToken?refreshToken=${getRefreshToken()}`)
+        const { data } = await axios.get(`/getRefreshedAccessToken?refreshToken=${getRefreshToken()}`)
         const { access_token } = data
         setAssessToken(access_token)
         return access_token
