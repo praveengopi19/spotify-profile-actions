@@ -7,9 +7,21 @@ module.exports = {
     entry: {
         main: path.resolve(__dirname, "../src/index.js")
     },
+    module: {
+        rules: [
+            {
+                //type: 'javascript/auto',
+                test: /\.svg$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]'
+                }
+            }
+        ]
+    },
     plugins: [new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
-        filename: 'index.html'
+        filename: 'index.html',
     })]
 }

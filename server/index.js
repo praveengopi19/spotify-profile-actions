@@ -8,15 +8,26 @@ const app = express()
 const axios = require('axios')
 const uuid = require('uuid')
 const history = require('connect-history-api-fallback')
+const expressStaticGzip = require("express-static-gzip");
 dotenv.config()
+const compression = require('compression');
 
 app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(bodyParser.json()) 
 app.use(cookieParser())
 app.use(cors())
+
+app.use('/', expressStaticGzip('client/build',{
+	enableBrotli: true,
+    customCompressions: [{
+        encodingName: 'gzip',
+        fileExtension: 'gz'
+    }],
+}));
+
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-
+app.use(compression());
 
 const client_id = process.env.CLIENT_ID
 const client_secret = process.env.CLIENT_SECRET
@@ -25,6 +36,7 @@ const redirect_uri = process.env.REDIRECT_URI || 'http://localhost:5000/callback
 const frontend_uri = process.env.FRONTEND_URI || 'http://localhost:3000'
 const PORT = process.env.PORT || 5000;
 const statekey = 'spotify_auth_state'
+
 
 
 let tokensForAuth ={}
@@ -148,6 +160,7 @@ app.get('/getRefreshedAccessToken', async function(req,res){
 	}
 
 })
+
 
 app.get('/*', function (req, res) {
 	res.sendFile(path.resolve(__dirname, '../client/build/index.html'));

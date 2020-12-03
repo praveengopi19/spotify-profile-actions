@@ -8,6 +8,8 @@ import './App.css'
 import App from './App'
 import ErrorBoundry from './components/ErrorBoundry.js'
 
+import './Assets/spotify.svg';
+
 ReactDOM.render(
     <ErrorBoundry>
         <Router>

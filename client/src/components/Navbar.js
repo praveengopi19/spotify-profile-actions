@@ -31,7 +31,6 @@ class Navbar extends Component {
     render() {
         return (
             <nav>
-                <span></span>
                 <div className="navInnerContainer">
                     <Link className={"navLink " + (this.checkNavActive("/") && "navLinkActive")} to="/">
                         <IconProfile className="navicons" />
@@ -54,7 +53,7 @@ class Navbar extends Component {
                         <div>Recent</div>
                     </Link>
                 </div>
-                <span></span>
+
             </nav>)
     }
 }
