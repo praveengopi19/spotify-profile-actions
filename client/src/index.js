@@ -9,6 +9,7 @@ import App from './App'
 import ErrorBoundry from './components/ErrorBoundry.js'
 
 import './Assets/spotify.svg';
+import './Assets/ogmockup.png'
 
 ReactDOM.render(
     <ErrorBoundry>

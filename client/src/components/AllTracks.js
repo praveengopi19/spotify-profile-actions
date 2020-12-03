@@ -17,7 +17,7 @@ class AllTracks extends Component {
                         return (
                             <Link key={track.id + i} className="linkClass" to={`/track/${track.id}`}>
                                 <div className="tracksIndividual" >
-                                    <img src={track.album.images[2].url} alt={track.name} />
+                                    <img src={track.album.images.length ? track.album.images[2].url : "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-size/original?v=mpbl-1&px=-1"} alt={track.name} />
                                     <div className="tracksNameAlbum">
                                         <div className="name">{track.name}</div>
                                         <div className="artistalbum">

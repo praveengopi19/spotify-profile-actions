@@ -17,10 +17,11 @@ export const getRefreshToken = () => localStorage.getItem('Spotify_refreshToken'
 // setAssessToken("a")
 // setRefreshToken("b")
 
-export const removeTokens = () => {
+export const removeTokens = (e) => {
     localStorage.removeItem('Spotify_accessToken')
     localStorage.removeItem('Spotify_refreshToken')
     window.location = "/"
+    e.stopPropagation()
 }
 
 
@@ -116,6 +117,9 @@ export const getArtist = async (id) => {
         return data
     }
     catch (e) {
+        if (e.response.data.error.message.toLowerCase() == "invalid id") {
+            return e.response.data.error.message
+        }
         return "server error"
     }
 }
@@ -126,6 +130,9 @@ export const getTrack = async (id) => {
         return data
     }
     catch (e) {
+        if (e.response.data.error.message.toLowerCase() == "invalid id") {
+            return e.response.data.error.message
+        }
         return "server error"
     }
 }
@@ -136,6 +143,10 @@ export const getPlaylist = async (id) => {
         return data
     }
     catch (e) {
+
+        if (e.response.data.error.message.toLowerCase() == "invalid playlist id") {
+            return e.response.data.error.message.toLowerCase()
+        }
         return "server error"
     }
 }

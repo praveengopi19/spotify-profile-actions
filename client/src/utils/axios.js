@@ -31,7 +31,7 @@ axiosApiInstance.interceptors.response.use(response => {
         removeTokens()
     }
 
-    Promise.reject(error)
+    return Promise.reject(error)
 })
 
 export default axiosApiInstance

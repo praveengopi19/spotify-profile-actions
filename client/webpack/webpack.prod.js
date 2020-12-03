@@ -27,6 +27,7 @@ module.exports = merge(common, {
                 return "[path][base].gz";
             }
 
+
             return "[path][base].gz";
         },
         //filename:"[path][base].gz",

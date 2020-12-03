@@ -71,9 +71,9 @@ class App extends React.Component {
         const { location } = this.props
         return (
             <>
-                {!this.state.isLoading ?
+                {!this.state.isLoading ? <>
+                    { this.state.auth && <Navbar />}
                     < Suspense fallback={<Loader />}>
-                        {this.state.auth && <Navbar />}
                         <Switch >
                             <Route path="/login" render={(props) => <Login {...props} auth={this.state.auth} />} exact />
                             <PrivateRoute path="/" location auth={this.state.auth} componet={User} exact />
@@ -87,7 +87,7 @@ class App extends React.Component {
                             <Route component={NotFound} />
                         </Switch>
                     </ Suspense >
-
+                </>
                     : <Loader />
                 }
             </>)

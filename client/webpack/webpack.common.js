@@ -11,7 +11,7 @@ module.exports = {
         rules: [
             {
                 //type: 'javascript/auto',
-                test: /\.svg$/i,
+                test: /\.(svg|png)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]'

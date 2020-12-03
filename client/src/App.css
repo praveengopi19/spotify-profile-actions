@@ -30,23 +30,8 @@ section {
     margin: auto;
 }
 
-.loginDiv {
-    display        : flex;
-    flex-direction : column;
-    min-height     : 100vh;
-    padding        : 80px 0;
-    width          : 100%;
-    justify-content: center;
-    align-items    : center;
-}
-
-.loginButton {
-    font-family  : 'Inter', sans-serif;
-    font-weight  : 400;
-    display      : block;
-    margin-top   : 10px;
-    padding      : .75rem 3rem;
-    border-radius: 30px;
+svg {
+    fill: #44476a
 }
 
 .error404 {
@@ -256,10 +241,11 @@ border-right        : .15rem solid #44476a;*/
 }
 
 /*All Artist*/
-.artistsAllImage {
-    height: 85vw;
-}
 
+.artistsAllImage,
+.allplaylistContainer svg {
+    height: 48vw;
+}
 
 .buttons>div {
     margin: 0px 6px 6px 6px;
@@ -387,8 +373,8 @@ gap                  : 30px; */
 }
 
 .allplaylistContainer .innerContainer {
-    flex           : 1 1 100%;
-    max-width      : 100%;
+    flex           : 1 1 48%;
+    max-width      : 50%;
     text-decoration: none;
     color          : inherit;
     border         : .0625rem solid transparent;
@@ -412,7 +398,8 @@ gap                  : 30px; */
     margin-top: 6px;
 }
 
-.allplaylistContainer img {
+.allplaylistContainer img,
+.allplaylistContainer svg {
     object-fit   : cover;
     border-radius: .55rem;
     width        : 100%;
@@ -599,6 +586,24 @@ gap                  : 30px; */
     outline    : none;
 }
 
+.loginDiv {
+    display        : flex;
+    flex-direction : column;
+    min-height     : 100vh;
+    padding        : 80px 0;
+    width          : 100%;
+    justify-content: center;
+    align-items    : center;
+}
+
+.loginButton {
+    font-family  : 'Inter', sans-serif;
+    font-weight  : 400;
+    display      : block;
+    margin-top   : 10px;
+    padding      : .75rem 3rem !important;
+    border-radius: 30px !important;
+}
 
 /*==========  Mobile First Method  ==========*/
 
@@ -623,16 +628,8 @@ gap                  : 30px; */
         width : 373px;
     }
 
-    /*All Playlist*/
-    .allplaylistContainer .innerContainer {
-        flex     : 1 1 48%;
-        max-width: 50%;
-        padding  : 1%;
-    }
 
-    .artistsAllImage {
-        height: 48vw;
-    }
+
 }
 
 /* Small Devices, Tablets */
@@ -651,7 +648,8 @@ gap                  : 30px; */
         padding  : 1%;
     }
 
-    .artistsAllImage {
+    .artistsAllImage,
+    .allplaylistContainer svg {
         height: 30vw;
     }
 
@@ -806,7 +804,8 @@ gap                  : 30px; */
     }
 
     /*All Artist*/
-    .artistsAllImage {
+    .artistsAllImage,
+    .allplaylistContainer svg {
         height: 17vw;
     }
 
@@ -854,7 +853,8 @@ gap                  : 30px; */
 
 
     /*All Artist*/
-    .artistsAllImage {
+    .artistsAllImage,
+    .allplaylistContainer svg {
         height: 13rem;
     }
 
