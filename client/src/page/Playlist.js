@@ -9,11 +9,15 @@ import { getPlaylist, getAudioFeaturesForTracks } from '../Spotify/index'
 class Playlist extends Component {
     state = {
         playlist: null,
-        audioFeatures: null
+        audioFeatures: null,
+        invalidId: false
     }
 
     async componentDidMount() {
         const tempPlaylist = await getPlaylist(this.props.match.params.id)
+        if (tempPlaylist == "invalid playlist id") {
+            return this.setState({ invalidId: true })
+        }
         this.setState({ playlist: tempPlaylist })
         if (tempPlaylist.tracks.items.length) {
             const audioFeatures = await getAudioFeaturesForTracks(tempPlaylist.tracks.items)
@@ -44,7 +48,7 @@ class Playlist extends Component {
                             <AllTracks items={this.state.playlist.tracks.items} from="playlist" />
                         </div>
                     </div>
-                ) : <Loader />}
+                ) : this.state.invalidId ? <div className="emptyContent"> No Playlist found at the given URL</div> : <Loader />}
             </>
         )
     }

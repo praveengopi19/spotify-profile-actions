@@ -31,7 +31,9 @@ class User extends Component {
     }
 
     render() {
+
         const { user, artists, tracks, following, playlists } = this.state
+
         return (
             user && following && tracks && artists && playlists ? (
                 <div className="userContainer ">
@@ -47,7 +49,7 @@ class User extends Component {
                                     <div className="secondaryText">FOLLOWING</div>
                                 </div>
                                 <div>
-                                    <div className="primaryText">{numberWithComa(artists.items.length)}</div>
+                                    <div className="primaryText">{numberWithComa(following.artists.total)}</div>
                                     <div className="secondaryText">FOLLOWERS</div>
                                 </div>
                                 <div>
@@ -61,7 +63,7 @@ class User extends Component {
                                     <button className="btn-primary">View on Spotify</button>
                                 </a>
                                 <div>
-                                    <button onClick={() => removeTokens()} className="btn-secondary">Log Out</button>
+                                    <button onClick={(e) => removeTokens(e)} className="btn-secondary">Log Out</button>
                                 </div>
 
                             </div>

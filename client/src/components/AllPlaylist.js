@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function AllPlaylist({ playlists }) {
-
     return (playlists.length > 0 ?
         <div className="allplaylistContainer">
             {playlists.map((playlist) => {

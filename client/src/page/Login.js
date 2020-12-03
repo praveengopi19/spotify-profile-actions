@@ -7,7 +7,7 @@ class Login extends Component {
             (<>
                 <div className="loginDiv">
                     <h2>Spotify Profile Action</h2>
-                    <a href={0 ? 'http://localhost:5000/loginserver' : "https://spotify-profile-actions.herokuapp.com/loginserver"} className="linkClass btn-primary loginButton" >LOG IN TO SPOTIFY</a>
+                    <a href={0 ? 'http://localhost:5000/loginserver' : "https://spotify-profile-actions.herokuapp.com/loginserver"} className="linkClass btn-primary loginButton" >LOG IN WITH SPOTIFY</a>
                 </div>
             </>))
     }

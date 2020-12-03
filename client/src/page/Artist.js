@@ -5,25 +5,31 @@ import { uppercaseFirstLetter } from '../utils/UppercaseFirstLetter'
 import { numberWithComa } from '../utils/NumbersWithComa'
 
 import { getArtist } from '../Spotify/index';
+import { IconProfile } from '../components/Icons';
 
 class Artist extends Component {
     state = {
-        artist: null
+        artist: null,
+        invalidId: false
     }
 
     async componentDidMount() {
         const tempArtist = await getArtist(this.props.match.params.id)
+        if (tempArtist == "invalid id") {
+            return this.setState({ invalidId: true })
+        }
         this.setState({ artist: tempArtist })
     }
 
 
     render() {
+
         return (
 
             this.state.artist ?
                 <div className="artist_individual">
                     <div className="artistCard">
-                        <img src={this.state.artist.images[1].url} />
+                        {this.state.artist.images.length ? <img src={this.state.artist.images[1].url} /> : <IconProfile />}
                         <div>
                             <h2>{this.state.artist.name}</h2>
                             <div className="primaryText">
@@ -44,7 +50,7 @@ class Artist extends Component {
                             </a>
                         </div>
                     </div>
-                </div> : <Loader />
+                </div> : this.state.invalidId ? <div className="emptyContent">No Artist found at the given url</div> : <Loader />
 
         )
     }

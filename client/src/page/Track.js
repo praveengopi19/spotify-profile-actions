@@ -10,13 +10,16 @@ class Track extends Component {
     state = {
         track: null,
         audioFeatures: null,
-        audioAnalysis: null
+        audioAnalysis: null,
+        invalidId: false
     }
 
     async componentDidMount() {
         const { id } = this.props.match.params
         const tempTrack = await getTrack(id)
-
+        if (tempTrack == "invalid id") {
+            return this.setState({ invalidId: true })
+        }
         if (tempTrack) {
             const tempFeatures = await getAudioTrackFeatures(id)
             const tempAnalysis = await getAudioAnalysis(id)
@@ -33,7 +36,7 @@ class Track extends Component {
             {this.state.track ? (
                 <div className="playlistIndividual">
                     <div className="playlistIndividual_details">
-                        <img src={this.state.track.album.images[0].url} />
+                        <img src={this.state.track.album.images.length ? this.state.track.album.images[0].url : "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-size/original?v=mpbl-1&px=-1"} />
                         <h2>{this.state.track.name}</h2>
                         {this.state.track.artists && <div className="primaryText">{this.state.track.artists.map(({ name, id }, i) => {
                             return (<span key={id}>
@@ -94,7 +97,7 @@ class Track extends Component {
                         </div>
                     </div>
                 </div>
-            ) : <Loader />}
+            ) : this.state.invalidId ? <div className="emptyContent">No Track found at the given url</div> : <Loader />}
         </>)
     }
 }
